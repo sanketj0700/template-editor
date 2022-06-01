@@ -65,6 +65,7 @@
   height: fit-content;
   display: grid;
   gap: 4px;
+  overflow: visible;
 }
 
 .actions-container button {
