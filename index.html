@@ -51,7 +51,7 @@
     // const zoomableDiv = document.querySelector(".template");
 
     let initialZoom = 1.0;
-    const incrementalZoom = 0.4;
+    const incrementalZoom = 0.2;
 
 
     // // on wheel scroll zoom event
@@ -105,12 +105,12 @@
       if (evCache.length == 2) {
         var curDiff = Math.abs(evCache[0].clientX - evCache[1].clientX);
 
-        if (prevDiff > 0) {
+        if (prevDiff > 0 && initialZoom <= 1.20) {
           if (curDiff > prevDiff) {
             console.log("Pinch moving OUT -> Zoom in", ev);
             ev.target.style.transform = `scale(${initialZoom += incrementalZoom})`;
           }
-          if (curDiff < prevDiff) {
+          if (curDiff < prevDiff && initialZoom>=0.80) {
             console.log("Pinch moving IN -> Zoom out",ev);
             ev.target.style.transform = `scale(${initialZoom -= incrementalZoom})`;;
           }
