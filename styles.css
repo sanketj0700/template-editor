@@ -1,0 +1,73 @@
+.header {
+  padding: 1rem 2rem;
+  text-align: center;
+  font-size: 1.6rem;
+  font-weight: 600;
+}
+
+.template-editor {
+  margin-top: 4rem;
+  margin-bottom: 10rem;
+  width: 80vw;
+  display: grid;
+  gap: 6px;
+  grid-template-columns: 6fr 1fr;
+}
+
+.template-container {
+  display: flex;
+  justify-content: center;
+}
+
+.template {
+  width: 15rem;
+  max-height: 20rem;
+  margin: 0 auto;
+  border: 2px solid rgb(71, 71, 158);
+}
+
+.template-text {
+  text-align: center;
+}
+
+.template-text:focus {
+  outline: none;
+}
+
+.template-header {
+  padding: 2px 0px;
+  background-color: rgb(71, 71, 158);
+  font-size: 26px;
+  font-weight: 700;
+  color: rgb(219, 219, 219);
+  caret-color: red;
+}
+
+.template-body {
+  padding: 12px 8px;
+  background-color: rgb(171, 171, 219);
+  font-size: 21px;
+  font-weight: 700;
+  caret-color: white;
+  color: black
+}
+
+.template-footer {
+  padding: 2px 0px;
+  background-color: rgb(71, 71, 158);
+  font-size: 26px;
+  font-weight: 700;
+  caret-color: red;
+  color: rgb(219, 219, 219);
+}
+
+.actions-container {
+  height: fit-content;
+  display: grid;
+  gap: 4px;
+}
+
+.actions-container button {
+  width: 50px;
+  height: 50px;
+}
