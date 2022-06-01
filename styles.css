@@ -17,6 +17,7 @@
 .template-container {
   display: flex;
   justify-content: center;
+  overflow: visible;
 }
 
 .template {
@@ -65,7 +66,6 @@
   height: fit-content;
   display: grid;
   gap: 4px;
-  overflow: visible;
 }
 
 .actions-container button {
