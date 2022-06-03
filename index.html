@@ -32,10 +32,10 @@
         </div> 
         <div class="actions-container">
           <button>
-            +
+            A1
           </button>
           <button>
-            -
+            A2
           </button>
           <button>
             A3
@@ -47,92 +47,98 @@
   </body>
 
   <script>
-  //   const parentDiv = document.querySelector(".template-container");
-  //   const zoomableDiv = document.querySelector(".template");
+    const parentDiv = document.querySelector(".template-container");
+    const zoomableDiv = document.querySelector(".template");
 
-  //   let initialZoom = 1.0;
-  //   const incrementalZoom = 0.2;
-
-
-  //   // // on wheel scroll zoom event
-  //   zoomableDiv.addEventListener("wheel", (e) => {
-  //     if(e.deltaY < 0 && initialZoom>=0.80) {
-  //       zoomableDiv.style.transform = `scale(${initialZoom -= incrementalZoom})`;
-  //     } else if (e.deltaY > 0 && initialZoom <= 1.20) {
-  //       zoomableDiv.style.transform = `scale(${initialZoom += incrementalZoom})`;
-  //     }
-  //   })
-
-  //   // // on pinch zoom event
-  //   // /*
-  //   //   Reference Link : https://developer.mozilla.org/en-US/docs/Web/API/Pointer_events/Pinch_zoom_gestures
-  //   // */
-  //   var evCache = new Array();
-  //   var prevDiff = -1;
-
-  //   function init() {
-  //     var el=document.querySelector(".template");
-  //     el.onpointerdown = pointerdown_handler;
-  //     el.onpointermove = pointermove_handler;
-
-  //     el.onpointerup = pointerup_handler;
-  //     el.onpointercancel = pointerup_handler;
-  //     el.onpointerout = pointerup_handler;
-  //     el.onpointerleave = pointerup_handler;
-  //   }
-
-  //   function pointerdown_handler(ev) {
-  //     evCache.push(ev);
-  //     console.log("pointerDown", ev);
-  //   }
-
-  //   function pointermove_handler(ev) {
-  //     console.log("pointerMove", ev);
-
-  //     for (var i = 0; i < evCache.length; i++) {
-  //       if (ev.pointerId == evCache[i].pointerId) {
-  //           evCache[i] = ev;
-  //       break;
-  //       }
-  //     }
-
-  //     if (evCache.length == 2) {
-  //       var curDiff = Math.abs(evCache[0].clientX - evCache[1].clientX);
-
-  //       if (prevDiff > 0 && initialZoom <= 1.20) {
-  //         if (curDiff > prevDiff) {
-  //           console.log("Pinch moving OUT -> Zoom in", ev);
-  //           ev.target.style.transform = `scale(${initialZoom += incrementalZoom})`;
-  //         }
-  //         if (curDiff < prevDiff && initialZoom>=0.80) {
-  //           console.log("Pinch moving IN -> Zoom out",ev);
-  //           ev.target.style.transform = `scale(${initialZoom -= incrementalZoom})`;;
-  //         }
-  //       }
-
-  //       prevDiff = curDiff;
-  //     }
-  //   }
+    let initialZoom = 1.0;
+    const incrementalZoom = 0.2;
 
 
-  //   function pointerup_handler(ev) {
-  //     console.log(ev.type, ev);
-  //     remove_event(ev);
+    // // on wheel scroll zoom event
+    zoomableDiv.addEventListener("wheel", (e) => {
+      if(e.deltaY < 0 && initialZoom>=0.80) {
+        zoomableDiv.style.transform = `scale(${initialZoom -= incrementalZoom})`;
+      } else if (e.deltaY > 0 && initialZoom <= 1.20) {
+        zoomableDiv.style.transform = `scale(${initialZoom += incrementalZoom})`;
+      }
+    })
 
-  //     if (evCache.length < 2) {
-  //       prevDiff = -1;
-  //     }
-  //   }
+    // // on pinch zoom event
+    // /*
+    //   Reference Link : https://developer.mozilla.org/en-US/docs/Web/API/Pointer_events/Pinch_zoom_gestures
+    // */
+    var evCache = new Array();
+    var prevDiff = -1;
+
+    function init() {
+      var el=document.querySelector(".template");
+      el.onpointerdown = pointerdown_handler;
+      el.onpointermove = pointermove_handler;
+
+      el.onpointerup = pointerup_handler;
+      el.onpointercancel = pointerup_handler;
+      el.onpointerout = pointerup_handler;
+      el.onpointerleave = pointerup_handler;
+    }
+
+    function pointerdown_handler(ev) {
+      evCache.push(ev);
+      console.log("pointerDown", ev);
+    }
+
+    function pointermove_handler(ev) {
+      console.log("pointerMove", ev);
+
+      for (var i = 0; i < evCache.length; i++) {
+        if (ev.pointerId == evCache[i].pointerId) {
+            evCache[i] = ev;
+        break;
+        }
+      }
+
+      if (evCache.length == 2) {
+        var curDiff = Math.abs(evCache[0].clientX - evCache[1].clientX);
+
+        if (prevDiff > 0 && initialZoom <= 1.20) {
+          if (curDiff > prevDiff) {
+            console.log("Pinch moving OUT -> Zoom in", ev);
+            ev.target.style.transform = `scale(${initialZoom += incrementalZoom})`;
+          }
+          if (curDiff < prevDiff && initialZoom>=0.80) {
+            console.log("Pinch moving IN -> Zoom out",ev);
+            ev.target.style.transform = `scale(${initialZoom -= incrementalZoom})`;;
+          }
+        }
+
+        // if(initialZoom>1.0) {
+        //   parentDiv.style.overflow = "scroll";
+        // } else {
+        //   parentDiv.style.overflow = "hidden";
+        // }
+
+        prevDiff = curDiff;
+      }
+    }
 
 
-  //   function remove_event(ev) {
-  //     for (var i = 0; i < evCache.length; i++) {
-  //       if (evCache[i].pointerId == ev.pointerId) {
-  //         evCache.splice(i, 1);
-  //         break;
-  //       }
-  //     }
-  //   }
+    function pointerup_handler(ev) {
+      console.log(ev.type, ev);
+      remove_event(ev);
+
+      if (evCache.length < 2) {
+        prevDiff = -1;
+      }
+    }
+
+
+    function remove_event(ev) {
+      for (var i = 0; i < evCache.length; i++) {
+        if (evCache[i].pointerId == ev.pointerId) {
+          evCache.splice(i, 1);
+          break;
+        }
+      }
+    }
 
 
   </script>
